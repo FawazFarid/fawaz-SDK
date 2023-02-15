@@ -22,4 +22,12 @@ RSpec.describe Lotr::Client do
       expect(resp["docs"].first["name"]).to be_kind_of String
     end
   end
+
+  describe ".quotes_for_movie", :vcr do
+    it "returns quotes for a movie" do
+      resp = @client.quotes_for_movie("5cd95395de30eff6ebccde5c")
+      expect(resp["docs"]).to be_kind_of Array
+      expect(resp["docs"].first["dialog"]).to be_kind_of String
+    end
+  end
 end
