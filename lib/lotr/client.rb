@@ -14,8 +14,8 @@ module Lotr
       Lotr::VERSION
     end
 
-    def movies
-      resp = self.class.get("/movie", headers: @headers)
+    def movies(options = {})
+      resp = self.class.get("/movie", headers: @headers, query: parse_query_params(options))
       handle_response(resp)
     end
 
@@ -24,8 +24,8 @@ module Lotr
       handle_response(resp)
     end
 
-    def quotes_for_movie(movie_id)
-      resp = self.class.get("/movie/#{movie_id}/quote", headers: @headers)
+    def quotes_for_movie(movie_id, options = {})
+      resp = self.class.get("/movie/#{movie_id}/quote", headers: @headers, query: parse_query_params(options))
       handle_response(resp)
     end
 
@@ -39,6 +39,13 @@ module Lotr
 
     def handle_error_response(resp)
       raise Lotr::Error, "Error: #{resp.code} #{resp.message}"
+    end
+
+    def parse_query_params(options)
+      # merge the sort and order params into one e.g sort=name:asc
+      options[:sort] = "#{options[:sort]}:#{options[:order]}" if options[:order]
+      options.delete(:order)
+      options
     end
   end
 end

@@ -1,0 +1,68 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5c/quote?limit=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <THE_ONE_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 16 Feb 2023 06:55:46 GMT
+      Server:
+      - Apache/2.4.41 (Ubuntu)
+      Content-Security-Policy:
+      - 'default-src ''self'';base-uri ''self'';block-all-mixed-content;font-src ''self''
+        https: data:;frame-ancestors ''self'';img-src ''self'' data:;object-src ''none'';script-src
+        ''self'';script-src-attr ''none'';style-src ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+      X-Dns-Prefetch-Control:
+      - 'off'
+      Expect-Ct:
+      - max-age=0
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      X-Download-Options:
+      - noopen
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - no-referrer
+      X-Xss-Protection:
+      - '0'
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Ratelimit-Limit:
+      - '100'
+      X-Ratelimit-Remaining:
+      - '79'
+      X-Ratelimit-Reset:
+      - '1676530588'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '252'
+      Etag:
+      - W/"fc-o5rcJOGyEB/2eQKFACvVGGnpZuM"
+    body:
+      encoding: UTF-8
+      string: '{"docs":[{"_id":"5cd96e05de30eff6ebcced61","dialog":"Who is she? This
+        woman you sing of?","movie":"5cd95395de30eff6ebccde5c","character":"5cd99d4bde30eff6ebccfc15","id":"5cd96e05de30eff6ebcced61"}],"total":503,"limit":1,"offset":0,"page":1,"pages":503}'
+  recorded_at: Thu, 16 Feb 2023 06:55:46 GMT
+recorded_with: VCR 6.1.0
