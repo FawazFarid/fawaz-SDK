@@ -23,7 +23,7 @@ module Lotr
               when 503      then Lotr::ServiceUnavailable
               when 500..599 then Lotr::ServerError
               end
-      klass.new(response)
+      klass.new(response.message)
     end
   end
 

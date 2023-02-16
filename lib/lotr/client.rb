@@ -51,7 +51,7 @@ module Lotr
 
     def parse_query_params(options)
       # merge the sort and order params into one e.g sort=name:asc
-      options[:sort] = "#{options[:sort]}:#{options[:order]}" if options[:order]
+      options[:sort] = "#{options[:sort]}:#{options[:order]}" if options[:order] && options[:sort]
       options.delete(:order)
       options
     end
