@@ -2,10 +2,11 @@
 
 ## Choice of libraries
 
-**Testing framework**: [RSpec](https://rspec.info/) -
-**HTTP client**: [HTTPParty](https://github.com/jnunemaker/httparty) - Who doesn't like to party? :tada: :tada: :tada: Just kidding, I chose this because it's simple and easy to use. I considered [Faraday](https://lostisland.github.io/faraday/) but I just needed a library that can do simple http requests, nothing fancy and easier to use than `Net::HTTP`.
+- **Testing framework**: [RSpec](https://rspec.info/) - mostly because I'm familiar with it and very readable DSL.
 
-I chose VCR for recording and replaying HTTP responses and Webmock for stubbing HTTP requests and responses.
+- **HTTP client**: [HTTPParty](https://github.com/jnunemaker/httparty) - Who doesn't like to party? :tada: :tada: :tada: Just kidding, I chose this because it's simple and easy to use. I considered [Faraday](https://lostisland.github.io/faraday/) but I just needed a library that can do simple http requests, nothing fancy and easier to use than `Net::HTTP`.
+
+- I chose `vcr` gem for recording and replaying HTTP responses and `webmock` for stubbing HTTP requests and responses.
 
 ## Making requests
 
@@ -49,7 +50,7 @@ Also provided alias methods for the API endpoints:
 
 ```ruby
 # List all movies
-client.get_movies # same client.movies
+client.get_movies # same as client.movies
 ```
 
 ## Accessing resources
@@ -79,7 +80,7 @@ At the moment The One API endpoints return a JSON response where `docs` is an ar
 
 This looks like anti-pattern to me. I think it would be better if the API returned a single object for single resources and an array of objects for collections. This would make it easier for the client to consume the API. I also don't undertstand why the API returns a `docs`, `page`, `pages`, `limit` and `total` fields, especially for single resources.
 
-In my opinion SDKs should follow the language's conventions and idioms and also make it easier for the application developer to consume the API. So, I decided to return an `OpenStruct` object for single resources and an array of `OpenStruct` objects for collections and transformed the keys from `camelCase` to `snake_case` so that users can access the data using dot notation or [] for fields returned in the API response e.g:
+In my opinion SDKs should follow the language's conventions and idioms and also make it easier for the application developer to consume the API. So, I decided to return an `OpenStruct` object for single resources and an array of `OpenStruct` objects for collections and transformed the keys from `camelCase` to `snake_case` so that users can access the data using dot notation or `[]` for fields returned in the API response e.g:
 
 ```ruby
 movie = client.movie("5cd95395de30eff6ebccde5b")
