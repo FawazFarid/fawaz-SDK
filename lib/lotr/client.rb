@@ -19,16 +19,19 @@ module Lotr
       resp = self.class.get("/movie", headers: @headers, query: parse_query_params(options))
       handle_response(resp, multiple_items: true)
     end
+    alias get_movies movies
 
     def movie(movie_id)
       resp = self.class.get("/movie/#{movie_id}", headers: @headers)
       handle_response(resp)
     end
+    alias get_movie movie
 
     def quotes_for_movie(movie_id, options = {})
       resp = self.class.get("/movie/#{movie_id}/quote", headers: @headers, query: parse_query_params(options))
       handle_response(resp, multiple_items: true)
     end
+    alias get_quotes_for_movie quotes_for_movie
 
     private
 

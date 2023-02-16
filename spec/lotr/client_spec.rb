@@ -18,6 +18,11 @@ RSpec.describe Lotr::Client do
       expect(movies.first.name).to eq "The Lord of the Rings Series"
     end
 
+    it "works with the alias method" do
+      movies = @client.get_movies
+      expect(movies).to be_kind_of Array
+    end
+
     it "returns movies with a limit" do
       movies = @client.movies(limit: 1)
       expect(movies.length).to eq 1
@@ -35,6 +40,11 @@ RSpec.describe Lotr::Client do
       expect(movie.name).to eq "The Fellowship of the Ring"
     end
 
+    it "works with the alias method" do
+      movie = @client.get_movie(movie_id)
+      expect(movie.name).to eq "The Fellowship of the Ring"
+    end
+
     it "raises an error if the movie id does not exist" do
       stub_request(:get, "https://the-one-api.dev/v2/movie/non-3xist3nt-mov13").to_return(status: 404)
       expect { @client.movie("non-3xist3nt-mov13") }.to raise_error(Lotr::NotFound)
@@ -46,6 +56,11 @@ RSpec.describe Lotr::Client do
       quotes = @client.quotes_for_movie(movie_id)
       expect(quotes).to be_kind_of Array
       expect(quotes.first["dialog"]).to eq "Who is she? This woman you sing of?"
+    end
+
+    it "works with the alias method" do
+      quotes = @client.get_quotes_for_movie(movie_id)
+      expect(quotes).to be_kind_of Array
     end
 
     it "returns quotes for a movie with a limit" do
