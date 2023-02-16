@@ -23,13 +23,13 @@ require 'lotr'
 client = Lotr::Client.new(api_key: 'your_api_key')
 
 # List all movies
-client.movies
+client.movies # or client.get_movies
 
 # Retrieve a movie
-client.movie("5cd95395de30eff6ebccde5b")
+client.movie("5cd95395de30eff6ebccde5b") # or client.get_movie("5cd95395de30eff6ebccde5b")
 
 # List all movie quotes for one specific movie
-client.quotes_for_movie("5cd95395de30eff6ebccde5b")
+client.quotes_for_movie("5cd95395de30eff6ebccde5b") # or client.get_quotes_for_movie("5cd95395de30eff6ebccde5b")
 ```
 
 ### Additional query parameters
