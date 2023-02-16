@@ -35,6 +35,11 @@ RSpec.describe Lotr::Client do
       expect(resp["docs"]).to be_kind_of Array
       expect(resp["docs"].first["name"]).to be_kind_of String
     end
+
+    it "raises an error if the movie id does not exist" do
+      stub_request(:get, "https://the-one-api.dev/v2/movie/non-3xist3nt-mov13").to_return(status: 404)
+      expect { @client.movie("non-3xist3nt-mov13") }.to raise_error(Lotr::NotFound)
+    end
   end
 
   describe ".quotes_for_movie", :vcr do
@@ -52,6 +57,11 @@ RSpec.describe Lotr::Client do
     it "returns quotes for a movie with a sort" do
       resp = @client.quotes_for_movie(movie_id, sort: "dialog", order: "desc")
       expect(resp["docs"].first["dialog"]).to eq "hmmmhmmm"
+    end
+
+    it "raises an error if the movie id does not exist" do
+      stub_request(:get, "https://the-one-api.dev/v2/movie/non-3xist3nt-mov13/quote").to_return(status: 404)
+      expect { @client.quotes_for_movie("non-3xist3nt-mov13") }.to raise_error(Lotr::NotFound)
     end
   end
 end

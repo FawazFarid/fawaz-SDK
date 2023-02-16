@@ -38,7 +38,8 @@ module Lotr
     end
 
     def handle_error_response(resp)
-      raise Lotr::Error, "Error: #{resp.code} #{resp.message}"
+      error = Lotr::Error.from_response(resp)
+      raise error
     end
 
     def parse_query_params(options)
