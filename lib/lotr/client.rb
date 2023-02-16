@@ -1,4 +1,5 @@
 require "httparty"
+require "lotr/response"
 
 module Lotr
   # Client for the Lord of the Rings API
@@ -16,7 +17,7 @@ module Lotr
 
     def movies(options = {})
       resp = self.class.get("/movie", headers: @headers, query: parse_query_params(options))
-      handle_response(resp)
+      handle_response(resp, multiple_items: true)
     end
 
     def movie(movie_id)
@@ -26,15 +27,18 @@ module Lotr
 
     def quotes_for_movie(movie_id, options = {})
       resp = self.class.get("/movie/#{movie_id}/quote", headers: @headers, query: parse_query_params(options))
-      handle_response(resp)
+      handle_response(resp, multiple_items: true)
     end
 
     private
 
-    def handle_response(resp)
+    def handle_response(resp, multiple_items: false)
       handle_error_response(resp) unless resp.success?
 
-      JSON.parse(resp.body)
+      docs = resp["docs"]
+      return Lotr::Response.parse_to_object!(docs.first) unless multiple_items
+
+      docs.map { |item| Lotr::Response.parse_to_object!(item) }
     end
 
     def handle_error_response(resp)

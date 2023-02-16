@@ -13,27 +13,26 @@ RSpec.describe Lotr::Client do
 
   describe ".movies", :vcr do
     it "returns all movies" do
-      resp = @client.movies
-      expect(resp["docs"]).to be_kind_of Array
-      expect(resp["docs"].first["name"]).to be_kind_of String
+      movies = @client.movies
+      expect(movies).to be_kind_of Array
+      expect(movies.first.name).to eq "The Lord of the Rings Series"
     end
 
     it "returns movies with a limit" do
-      resp = @client.movies(limit: 1)
-      expect(resp["docs"].length).to eq 1
+      movies = @client.movies(limit: 1)
+      expect(movies.length).to eq 1
     end
 
     it "returns movies with a sort" do
-      resp = @client.movies(sort: "name", order: "asc")
-      expect(resp["docs"].first["name"]).to eq "The Battle of the Five Armies"
+      movies = @client.movies(sort: "name", order: "asc")
+      expect(movies.first["name"]).to eq "The Battle of the Five Armies"
     end
   end
 
   describe ".movie", :vcr do
     it "returns a movie" do
-      resp = @client.movie(movie_id)
-      expect(resp["docs"]).to be_kind_of Array
-      expect(resp["docs"].first["name"]).to be_kind_of String
+      movie = @client.movie(movie_id)
+      expect(movie.name).to eq "The Fellowship of the Ring"
     end
 
     it "raises an error if the movie id does not exist" do
@@ -44,19 +43,19 @@ RSpec.describe Lotr::Client do
 
   describe ".quotes_for_movie", :vcr do
     it "returns quotes for a movie" do
-      resp = @client.quotes_for_movie(movie_id)
-      expect(resp["docs"]).to be_kind_of Array
-      expect(resp["docs"].first["dialog"]).to be_kind_of String
+      quotes = @client.quotes_for_movie(movie_id)
+      expect(quotes).to be_kind_of Array
+      expect(quotes.first["dialog"]).to eq "Who is she? This woman you sing of?"
     end
 
     it "returns quotes for a movie with a limit" do
-      resp = @client.quotes_for_movie(movie_id, limit: 1)
-      expect(resp["docs"].length).to eq 1
+      quotes = @client.quotes_for_movie(movie_id, limit: 1)
+      expect(quotes.length).to eq 1
     end
 
     it "returns quotes for a movie with a sort" do
-      resp = @client.quotes_for_movie(movie_id, sort: "dialog", order: "desc")
-      expect(resp["docs"].first["dialog"]).to eq "hmmmhmmm"
+      quotes = @client.quotes_for_movie(movie_id, sort: "dialog", order: "desc")
+      expect(quotes.first["dialog"]).to eq "hmmmhmmm"
     end
 
     it "raises an error if the movie id does not exist" do
