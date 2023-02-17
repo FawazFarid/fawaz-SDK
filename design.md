@@ -128,5 +128,5 @@ client = Lotr::Client.new(api_key: 'easy_peasy')
 
 ## Some other stuff I'd like to add (If I had more time)
 
-- Implement sorting for `/movie` and `/quote` endpoints but it doesn't seem to be supported by the API
+- Implement filtering for `/movie` and `/quote` endpoints but it doesn't seem to be supported by the API
 - fetching API key from local .env file using [dotenv](https://github.com/bkeepers/dotenv) gem.
