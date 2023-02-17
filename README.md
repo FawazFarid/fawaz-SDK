@@ -78,7 +78,7 @@ end
 
 ### Design
 
-See [DESIGN.md](DESIGN.md) for more details on the design of the SDK.
+See [design.md](https://github.com/FawazFarid/fawaz-SDK/blob/main/design.md) for more details on the design of the SDK.
 
 ## Development
 
