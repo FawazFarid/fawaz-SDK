@@ -6,6 +6,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+/lotr-*.gem
 
 # rspec failure tracking
 .rspec_status
